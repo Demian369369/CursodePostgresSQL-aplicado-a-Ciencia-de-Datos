@@ -1,0 +1,16 @@
+Presentación del proyecto
+Dashboards.Tableros que nos permite identificar muchas cuestiones acerca del negocio.
+Se manejan muy diferente de acuerdo al tipo de público.
+........................................................
+Extraer, transformar y dejar los datos de manera que puedan ser consumidos fácilmente por herramientas gráficas de presentación de datos. Si bien la visualización de datos es una disciplina importante, este proyecto se centra en la preparación de datos para su presentación.
+.......................................................
+Presentación del proyecto
+Crear un Dashboard
+
+las aplicaciones más directas de la ciencia de datos son los Dashboards
+
+los Dashboards son tableros que nos permiten de forma muy directa y visual identificar de un vistazo información vital para el negocio
+
+los Dashboards dependen del tipo de publico ya que depende de la posición en la organización un tipo de información sera más valiosa que otra.
+
+Nos enfocaremos en dejar la información a modo que cualquier herramienta de presentación de datos pueda utilizar la información fácilmente

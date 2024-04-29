@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    container_name: postgres
+    restart: always
+    #1)Que es la imagen en docker? Bueno, en este caso, estariamos obteniendo de manera PUBLICA la IMAGEN es decir... LA APLICACION postgres!
+    #env_file:
+    #  - .env
+    environment:
+      - POSTGRES_DB=my_db
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=04145893431
+    ports:
+      - 5432:5432
+      #5) Aca es donde conecto mi servidor con mis datos, ent este caso como es local, es decir, no conecto con un servidor en la nube, tan solo uno miData:conElServidorQueConectare  En este caso ambos son 5432, ya que estoy conectando mi data a mi propio servidor local de mi pc, nignnuno de la nube 
+    volumes:
+    #5) El volumes nos sirve para crear persistencia, es decir, "Todo lo que yo tenga en mi contendor, quiero almacenarlo YO en un archivo para mayor seguridad".
+      - /postgres-data:/var/lib/postgresql/data
+      #6) El ./postgres_data significa que justamtene el archivo que se creara para que se guarde la data esta en la carpeta ./postgres_data, (a su vez debe ser privadad, asi que no la subas a github) Mientras que por otro lado tenemos el /var/lib/postgresql/data, que hace esta ruta? Bueno simplemente hay que entender que esta ruta conecta con la base de datos, es decir, los datos estan guardados en esta ruta en postgresql... POR LO TANTO NOSOTROS PARA CREAR PERSISTENCIA ABSROBEMOS LA DATA DE VAR/LIB/POSTGRESQLETC Y LA LLEVAMOS A POSTGRES_DATA. SABIENDO QUE NO DEBE IR A GITHUB.
+
+      #7) Es importante saber que la ruta /var/lib/postgresql/data es de donde obtenemos la imagen. Pero esta ruta puede variar por cuestion de la empresa queu crea la db y demas, entonces la manera de siempre tener esta ruta lista para absorber la imagen es consultando la documentacion de hub.docker.com
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=root@mail.com
+      - PGADMIN_DEFAULT_PASSWORD=04145893431
+    ports:
+      - 5050:80
+  #Metabase para visualizaciones
+  dataviz:
+    image: metabase/metabase
+    container_name: metabase
+    restart: always
+    environment:
+      - MB_DB_TYPE=postgres
+      - MB_DB_DBNAME=my_db
+      - MB_DB_PORT=5432
+      - MB_DB_USER=root
+      - MB_DB_PASS=04145893431
+      - MB_DB_HOST=db
+      - MB_DB_FILE=/metabase-data/metabase.db
+    depends_on:
+      - db
+    volumes:
+      - dataviz_data:/metabase-data
+    ports:
+      - 3000:3000
+volumes:
+  postgres_data: {}
+  db_data:
+  dataviz_data:
+
+# levanta 
+# docker-compose up -d postgres
+# Levanta
+# docker-compose up -d pgadmin
+#
+#Si cambias algun dato  docker-compose down -v   luego   docker-compose up -v
+# docker-compose  ps
+
+
+# Si los datos persisten:
+# hacer docker-compose down
+# sudo rm -rf postgres_data ⇒ Asi eliminamos lo que docker ha guardado en memoria como que la db= my_store
+# ir a docker-compose.yml, y cambiar absolutamente todo lo que hayan hecho, es decir, renombrar la db, el usuario, todo.
+# guardar todo, crear la carpeta /postgres_data de 0, y lanzar docker desde 0, como siempre, vaya.
+# docker-compose exec postgres bash

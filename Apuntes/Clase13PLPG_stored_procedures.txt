@@ -1,0 +1,58 @@
+Funciones → Son más avanzadas. Regresan tipos de datos. Tienen más flexibilidad. No son estándar de SQL, se tiene que usar el lenguaje PLPGSQL.
+Procedures → Integran lógica a la sentencias SQL. Se han ido incluyendo en el estándar SQL. No regresan ningún valor.
+.................................................
+PLPGSQL es un lenguaje ampliado derivado desde el SQL pudiendo ejecutar codigo SQL estandar y funciones especificas de este lenguaje
+
+Existen
+
+Store procedures Integran lógica a la sentencias SQL. Se han ido incluyendo en el estándar SQL. No regresan ningún valor.
+
+Functions Son mas avanzadas estan hechas en el lenguaje de PLPGSQL, Regresan tipos de datos. Tienen más flexibilidad. No son estándar de SQL.
+.................................................
+PLPGSQL: Stored procedures
+PLPGSQL - Procedural Language PostgreSQL
+
+Lenguaje que Postgres creó para hacer programación más ordenada y procedural y tiene un componente muy fuerte para hacer triggers y store procedures .
+
+Un procedure o procedimiento:
+
+es una serie de pasos (similar a una función)
+Tienen la característica de que NO regresa ningún valor.
+Son parte de SQL Standard
+PLPGSQL es un superset, lenguaje ampliado del Standard SQL , donde se pueden hacer todas las sentencias SQL normales o estandar, pero por encima de ello, tiene funciones muy específicas para hacer ciertas cosas, como las funciones, procedures o triggers.
+
+Las funciones:
+
+son mucho más avanzadas
+permiten más flexibilidad
+retornan tipos de datos
+NO son estándar, por lo que necesitaremos PLPGSQL.
+
+-- PROCEDURE
+create or replace PROCEDURE test_dropcreate_procedure()
+LANGUAGE SQL
+AS $$
+    DROP TABLE if exists aaa;
+    CREATE TABLE aaa(
+        bbb varchar(5) CONSTRAINT first PRIMARY KEY;
+    );
+$$;
+
+CALL test_dropcreate_procedure();
+
+-- FUNCTION
+CREATE OR REPLACE FUNCTION test_dropcreate_function()
+RETURNS void -- Regresa un vacío, como un procedure
+LANGUAGE plpgsql
+AS $$ --necesitaremos begin y end siempre para hacer la funcion
+    BEGIN
+        DROP TABLE if exists aaa;
+        CREATE TABLE aaa(bbb char(5) CONSTRAINT firstkey PRIMARY KEY, ccc char(5));
+        DROP TABLE if exists aaab;
+        CREATE TABLE aaab(bbba char(5) CONSTRAINT secondkey PRIMARY KEY, ccca char(5));
+    END
+$$;
+
+SELECT test_dropcreate_function();
+Las PRIMARY KEYS deben de ser únicas en toda la DB.
+

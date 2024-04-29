@@ -1,0 +1,7 @@
+RETURNS se usa para definir que tipo de dato o evento va a retornar la función int, char, date, trigger, etc...
+
+RETURN se usa para devolver el valor en sí de la función, el resultado que se desea.
+
+Recuerda que las funciones también son procedures PERO retornan un valor. El profesor hace uso de la sentencia EXECUTE PROCEDURE dado a que es la forma en como Postgres permite definir triggers que llaman funciones.
+
+Un detalle sobre los triggers a considerar es que estos pueden llegar a ser un cuello de botella cuando se utilizan en tablas altamente transaccionales y con gran cantidad de volumen de información. Si puedes omitir el uso de un trigger, hazlo. Cámbialo por un stored procedure que pueda ser llamado desde un aplicativo o proceso batch. Si forzosamente debes utilizar un trigger, considera el volumen y transaccionalidad de la tabla para evitar problemas en presente o futuro :)

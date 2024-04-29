@@ -1,0 +1,23 @@
+CREATE OR REPLACE PROCEDURE test_drpcreate_procedure()
+LANGUAGE SQL
+AS $$
+	DROP TABLE IF EXISTS aaa;
+	CREATE TABLE aaa (bbb char(5) CONSTRAINT firstkey PRIMARY KEY);
+$$;
+
+CALL test_drpcreate_procedure();
+.............................................
+CREATE OR REPLACE FUNCTION test_dropcreate_function()
+RETURNS VOID AS $$
+BEGIN
+    DROP TABLE IF EXISTS aaa;
+    CREATE TABLE aaa(bbb CHAR(5) CONSTRAINT firstkey PRIMARY KEY, ccc CHAR(5));
+    DROP TABLE IF EXISTS aaab;
+    CREATE TABLE aaab(bbba CHAR(5) CONSTRAINT secondkey PRIMARY KEY, ccc CHAR(5));
+END;
+$$ LANGUAGE plpgsql;
+
+
+SELECT test_dropcreate_function();
+
+............................................

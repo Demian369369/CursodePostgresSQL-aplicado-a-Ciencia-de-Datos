@@ -1,0 +1,26 @@
+CREATE TABLE ordenes(
+	ID serial NOT NULL PRIMARY KEY,
+	info json NOT NULL 
+);
+................................................................
+INSERT INTO ordenes(info)
+VALUES 
+	(
+		'{"cliente": "David Sanchez", "items": {"producto":"Biberon", "cantidad": "24"}}'
+	),
+	(
+		'{"cliente": "Edna Cardenas", "items": {"producto":"Carro juguete", "cantidad": "1"}}'
+
+	),
+	(
+		'{"cliente": "Demian Ragknos", "items": {"producto":"Tren juguete", "cantidad": "2"}}'
+	);
+................................................................
+SELECT 
+	info ->> 'cliente' AS cliente 
+FROM ordenes;
+................................................................
+SELECT 
+	info ->> 'cliente' AS cliente 
+FROM ordenes
+WHERE info -> 'items' ->> 'producto' = 'Biberon';

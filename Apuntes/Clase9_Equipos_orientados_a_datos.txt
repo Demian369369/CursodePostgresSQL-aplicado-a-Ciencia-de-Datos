@@ -1,0 +1,48 @@
+DBA (Dabta Base Administrator) Mantener y administrar el motor de base de datos
+Data Warehouse (Almacén de datos). Guardar datos pensando a futuro para poder trabajarse
+ETL/ Data Pipelines Llevar datos de un lado a otro
+BI (Business Intelligence) Precursores del DataScience, empezar a extraer datos y entender los datos y sus repercusiones, encontrar patrones
+Data Science Entender a la organización e impactarla de forma positiva
+ML (Machine Learning) Técnica para clasificar información o realizar predicciones con datos historicos
+..........................................
+ Un Data Scientist es un profesional altamente capacitado que utiliza técnicas avanzadas en estadísticas, matemáticas y programación para analizar grandes volúmenes de datos y extraer información significativa. El Data Scientist transforma datos en conocimientos, identifica patrones, realiza predicciones y ayuda a la organización a tomar decisiones basadas en datos.   ++Responsabilidades Típicas:++
+
+Recopilación y Limpieza de Datos: Recolectar datos de diversas fuentes, limpiar y preparar los datos para el análisis.
+
+Análisis Exploratorio de Datos (EDA): Realizar análisis exploratorios para entender la estructura y características de los datos.
+
+Desarrollo de Modelos Predictivos: Utilizar técnicas de machine learning y estadísticas para desarrollar modelos predictivos y algoritmos.
+
+Validación y Evaluación: Validar y evaluar la precisión de los modelos utilizando métricas apropiadas.
+
+Visualización de Datos: Crear visualizaciones efectivas para comunicar resultados a las partes interesadas.
+
+Optimización de Modelos: Optimizar y ajustar modelos para mejorar su rendimiento y precisión.
+
+Colaboración Interdisciplinaria: Colaborar con equipos interdisciplinarios, incluyendo científicos de datos, ingenieros de datos y analistas de negocio.
+
+Resolución de Problemas: Abordar problemas complejos utilizando enfoques analíticos y encontrar soluciones innovadoras.
+
+Comunicación: Comunicar hallazgos y resultados de manera clara y comprensible a audiencias no técnicas.  
+
+++Habilidades y Requisitos:++
+
+Fuertes habilidades en matemáticas, estadísticas y programación (por ejemplo, Python, R, SQL). Experiencia en el uso de herramientas y frameworks de machine learning.
+Conocimiento en bases de datos y tecnologías de almacenamiento de datos.
+Capacidad para trabajar con grandes conjuntos de datos y entender complejidades específicas del dominio.
+Excelentes habilidades de comunicación y capacidad para contar historias con datos.
+Habilidades para el trabajo en equipo y la colaboración interdisciplinaria. Capacidad para pensar analíticamente y resolver problemas complejos.
+  ++Educación y Experiencia:++
+
+Un ++título de grado++ en campos relacionados como Ciencias de la Computación, Estadísticas, Matemáticas o Ingeniería es comúnmente requerido. Muchos Data Scientists también tienen títulos avanzados (maestrías o doctorados) y tienen experiencia previa en análisis de datos o campos relacionados.
+
+Los Data Scientists son profesionales altamente demandados en la era moderna de la información, ya que su experiencia es esencial para las organizaciones que buscan aprovechar al máximo los datos para tomar decisiones estratégicas informadas. (Según GPT3)
+...............................................................
+ Equipos orientados a datos
+DBA (Data Base Administrator) primer rol creado con las bases de datos.
+Data Warehouse (Almacén de datos) tomar los datos y tratar de guardarlos de una forma extraíble.
+ETL / Data Pipelines (Extract Transform Load / Tuberías de datos)
+BI (Business Intelligence - Inteligencia del negocio)
+ML (Machine Learning) clasificación y predicción
+Data Science (Ciencia de Datos) entender a la organización e impactarla de forma positiva.
+.............................................

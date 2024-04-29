@@ -1,0 +1,46 @@
+SELECT	ciudad,
+	COUNT(cliente_id) AS n
+FROM clientes AS c
+INNER JOIN direcciones AS d ON c.direccion_id = d.direccion_id
+INNER JOIN ciudades AS ci ON d.ciudad_id = ci.ciudad_id
+GROUP BY ciudad
+ORDER BY n DESC
+--Tendríamos como resultado que Londres y Aurora deberían competir para cumplir con está hipótesis
+
+
+SELECT	ciudad,
+	SUM(precio_renta) AS ventas
+FROM peliculas AS p
+INNER JOIN inventarios AS i ON p.pelicula_id = i.pelicula_id
+INNER JOIN rentas AS r ON i.inventario_id = r.inventario_id
+INNER JOIN clientes AS c ON r.cliente_id = c.cliente_id
+INNER JOIN direcciones AS d ON c.direccion_id = d.direccion_id
+INNER JOIN ciudades AS ci ON d.ciudad_id = ci.ciudad_id
+GROUP BY ciudad
+ORDER BY ventas DESC;
+--Justamente sale Aurora como ganador pero eso no aprueba nuestra hipótesis porque Londres debería estar de segundo lugar o primero pero sale como apenas sexto, entonces podríamos llegar a la conclusión que deberíamos ver cuantas películas se rentaron por ciudad y a que precio.
+........................
+
+SELECT clasificacion, ROUND(AVG(precio_renta),2) AS precio_promedio
+FROM peliculas
+GROUP BY clasificacion
+ORDER BY precio_promedio DESC;
+
+...........................
+SELECT CONCAT(c.nombre, ' ', c.apellido) AS nombre_completo, SUM(cantidad) AS pago_total
+FROM clientes AS c
+INNER JOIN pagos AS p
+USING (cliente_id)
+GROUP BY cliente_id
+ORDER BY pago_total DESC
+LIMIT 10;
+............................
+SELECT actor_id, COUNT(pelicula_id) AS peliculas_totales
+FROM peliculas_actores
+GROUP BY actor_id
+ORDER BY peliculas_totales DESC
+LIMIT 5
+.............................
+SELECT l.nombre AS idioma, COUNT(p.titulo) AS total_peliculas FROM lenguajes AS l INNER JOIN peliculas AS p ON l.lenguaje_id = p.lenguaje_id GROUP BY idioma;
+
+

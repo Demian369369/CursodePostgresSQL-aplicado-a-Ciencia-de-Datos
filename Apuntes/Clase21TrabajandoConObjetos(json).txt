@@ -1,0 +1,26 @@
+Una caracteristica muy importante de PostgreSQL es su capacidad de trabajar con estructuras JSON.
+
+JSON Texto plano - Es unicamente un string de texto.
+JSON Binary - Es más rápido de procesar ya que se guarda como un archivo binario.
+El uso de objetos nos dará más flexibilidad en el trabajo.
+
+
+-- Inserción de datos
+INSERT INTO  ordenes(info)
+VALUES
+('{"cliente":"Edna Moda", "items":{"producto":"Biberon", "cantidad":3}}'),
+('{"cliente":"Juan Moda", "items":{"producto":"Carro", "cantidad":3}}');
+
+-- Extrae los datos con formato JSON
+SELECT info->'cliente' AS cliente FROM ordenes;
+
+-- Extrae los datos con el tipo de dato asignado por Postgres
+SELECT info->>'cliente' AS cliente FROM ordenes;
+
+............................
+en mi trabajo no usamos base de datos no sql y cuando tenemos formularios con mucha información entonces asignamos campos json o jsonb. No obstante solemos utilizar también esta función del postgres para convertir la fila o las filas en formato json
+
+SELECT json_build_object( 'id', id, 'info', info )json_data FROM ordenes WHERE info -> 'items' ->> 'cantidad' = '1';
+
+Esto lo que hace es devolver la consulta en formato json completo y eso a su vez al llamar en un formulario que utilice angular o react se puede devolver en formato json sin tener que convertir del lado del javascript(ejemplo)
+

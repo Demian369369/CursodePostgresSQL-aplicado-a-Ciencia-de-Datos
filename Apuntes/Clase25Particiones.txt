@@ -1,0 +1,46 @@
+Particionado - Dividir una tabla en segmentos lógicos. Es una practica común de los manejadores, pero no todos ofrecen la opción para los usuarios de administrar estas particiones. Resulta útil para optimizar las consultas de datos. Observaciones:
+
+No todas las tablas deben de ser particionadas, vale la pena hacerlo unicamente cuando hay muchos registros.
+Permite optimizar algunas consultas al no tener que buscar dentro de toda una tabla sino unicamente en un segmento especifico.
+El particionado altera la consistencia de la tablas
+No existen los indices (llaves primarias) en las particiones, o mejor dicho, estos indices cambian basándose en la partición. e.g Si particionas una tabla por fechas, al buscar un dato especifico el primer criterio de búsqueda será la fecha
+............................................................................
+Yo administro diversas bases de datos, entre ellas oracle, y dentro de oracle es válido y recomendado tener una llave primaría ajena a los criterios de particionamiento de las tablas, ya que muchas veces, la información suele ser accedida por los criterios de particionamiento (mayormente estatus, tipos y fechas) o por la llave primaria de registros específicos. Por lo que, lo comentado por el profesor, aplica en la configuración y usabilidad propia de PostgreSQL, siendo que otros manejadores relacionales (en este caso, Oracle) si lo contempla.
+
+Saludos!
+................................
+¿Para qué sirve?
+
+Reduce la cantidad de datos a recorrer en cada consulta SQL Aumenta el rendimiento (Menos datos que recorrer => execución más rápida). ¿En que consiste?
+
+Segmentación de la información mediante criterios. ¿Cúales son los Criterios?
+
+Por definiciones exactas. Por rangos.
+.................................
+Tablas particionadas
+Suelen usarse para reportes históricos ya que se pueden configurar para ser divididas por rangos de fecha, de esta manera son mas livianas y se consulta específicamente el rango que se desea evaluar, sin necesidad de pasar por todo el registro histórico. Estas tablas como se encuentran particionadas no poseen una llave primaria y son referenciadas hacia otras tablas.
+................................
+Postgres crea una tabla como tipo particionable el cual en sí no es una tabla, sino un apuntador a tablas. Es necesario crear tablas adicionales con diferente nombres e indicar que pertenecen a la tabla particionable y bajo que dominio o rango van a tener los datos. Por ejemplo. Puedes crear una tabla relacionarla a la particionable e indicar que ahi van a estar los datos del año 2020 al 2025, luego otra tabla con los años 2025 al 2030.
+
+TablaCompras (particionable) TablaCompras2020_2025 TablasCompras2025_2030
+..................................
+Postgres crea una tabla como tipo particionable el cual en sí no es una tabla, sino un apuntador a tablas. Es necesario crear tablas adicionales con diferente nombres e indicar que pertenecen a la tabla particionable y bajo que dominio o rango van a tener los datos. Por ejemplo. Puedes crear una tabla relacionarla a la particionable e indicar que ahi van a estar los datos del año 2020 al 2025, luego otra tabla con los años 2025 al 2030.
+
+TablaCompras (particionable) TablaCompras2020_2025 TablasCompras2025_2030
+...................................
+25. Particiones
+Dividirla en segmentos lógicos para que sea más fácil de consultar.
+No todas las tablas deben ser particionadas.
+En SQL, una partición se refiere a dividir una tabla en secciones más pequeñas basadas en un criterio específico. Cada sección o partición resultante actúa como una entidad independiente y puede ser tratada como una tabla separada.
+
+La partición de una tabla puede ser útil en varias situaciones, como:
+
+Mejorar el rendimiento: Al particionar una tabla, se puede distribuir la carga de trabajo en diferentes unidades de almacenamiento o servidores, lo que puede mejorar el rendimiento de consultas y operaciones.
+Mantenimiento eficiente: Al particionar una tabla, es posible realizar operaciones de mantenimiento, como respaldos o indexación, de forma más eficiente, ya que solo se necesita actuar sobre una partición en lugar de toda la tabla.
+Administración de datos históricos: Si tienes una tabla grande con datos históricos, puedes particionarla en función de la fecha, lo que facilita la gestión y consultas específicas en un rango de fechas determinado.
+Cumplimiento de normativas: Algunas regulaciones o políticas pueden requerir que ciertos datos se almacenen en particiones separadas para cumplir con requisitos de seguridad o privacidad.
+La partición de tablas se puede realizar utilizando diferentes enfoques dependiendo del sistema de gestión de bases de datos que estés utilizando. Algunas bases de datos tienen funcionalidades específicas para la partición, como MySQL con su particionamiento por rangos o listas. Otros sistemas, como PostgreSQL, permiten realizar particiones mediante el uso de tablas heredadas o particiones declarativas.
+
+Al particionar una tabla, es importante considerar el criterio de particionamiento adecuado, como rangos de valores, valores discretos o fechas, para que las particiones resultantes sean lógicas y útiles en función de tus necesidades específicas. Además, debes tener en cuenta cómo las particiones afectarán el rendimiento y la capacidad de gestión de tus consultas y operaciones en la base de datos.
+
+

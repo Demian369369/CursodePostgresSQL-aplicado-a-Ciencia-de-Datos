@@ -1,0 +1,19 @@
+Diferencias entre PostgreSQL y otros manejadores de bases de datos
+Código libre y orientado a la comunidad.
+Base de datos adaptable: soporta documentos JSON y orientadas a estadísticas.
+PL/pgSQL (procedural languaje).
+Manejador de objetos: objetos clave/valor.
+Particiones: permite ejercer una estrategia de particionado para Big Data.
+Common table expressions: usa tablas virtuales y dinámicas en tiempo de ejecución.
+Window functions: encontrar la relación entre un row particular y su relación con toda la tabla.
+....................................................
+MariaDB es la continuacion de MySQL que mantiene la filosofia OpenSource que nacio justamente despues de la compra de MySQL por parte de Oracle y hasta donde tengo entendido esta impulsado y desarrollado por uno de los fundadores de MySQL. Lo que recuerdo de aquella epoca (hace 20 años de mysql y postgresql) es que MySQL era mas masiva por lo sencilla y por ser casi un standard para web y para proyectos open source (de hecho se acuño la sigla LAMP por Linux Apache MySQL y PHP como base de desarrollo web) y PostgreSQL era mas profesional y mas recomendada para uso de gestion y empresarial.
+......................................................
+Diferencias entre otros manejadores y PostgreSQL
+Código abierto
+Adaptable
+Manejo de Objetos
+Particiones
+Common table expressions
+Window functions
+........................................................

@@ -1,0 +1,31 @@
+Un científico de datos entiende el negocio y sus necesidades para traducirlo a los demás equipos de datos. El cientifico de datos es el líder. Su trabajo da impacto a la organización
+
+DBAs
+Analistas
+Ingenieros
+En muchas organizaciones va a haber una única persona que se encargue de todo el proceso de datos
+
+Contar historias con los datos
+Las habilidades siempre van a ser necesarias en cualquier organización
+......................................................................
+Idealmente en una empresa se tiene un equipo de datos conformado por varias personas, el científico de datos es quien se encarga de gestionar todo el equipo.
+
+El científico de datos es el encargado que los datos impacten de manera positiva a la organización usando todos los recursos a la mano.
+A veces al científico de datos le toca hacer todo lo del equipo pues es el único en todo el equipo.
+Las habilidades del científico de datos siempre van a ser necesarias en la organización pues le dan un sentido e interpretación a los datos. https://platzi.com/cursos/data/
+..........................................................................
+¿Qué es la ciencia de datos?
+Tiene la facultad de entender bien le negocio y traducir las necesidades del mismo a los equipos de datos.
+La aportación más grande del científico de datos es el impacto positivo a la organización.
+Siempre va a existir la necesidad de alguien que entienda las necesidades y que utilice los datos que ya existen para transformarlos en algo que cuente una historia para la buena toma de decisiones que genere un impacto positivo.
+Las habilidades de un científico de datos siempre van a ser necesarias en las empresas.
+.....................................................
+La ciencia de datos es un campo interdisciplinario que utiliza métodos científicos, procesos, algoritmos y sistemas para extraer conocimientos e información valiosa a partir de datos en diversas formas. Combina elementos de estadísticas, matemáticas, informática y dominio del área para analizar y comprender fenómenos, hacer predicciones y tomar decisiones basadas en evidencia.
+
+La ciencia de datos se aplica en una variedad de industrias, desde la atención médica y finanzas hasta marketing y ciencias sociales. Los profesionales de datos, como científicos de datos y analistas, utilizan herramientas y lenguajes de programación como Python y R para realizar análisis avanzados y desarrollar modelos predictivos. La disciplina continúa evolucionando a medida que la tecnología y los conjuntos de datos disponibles se expanden, desempeñando un papel crucial en la toma de decisiones basada en datos en el mundo actual.
+..............................................
+Entender bien el negocio.
+Traducir las necesidades de datos de la organización.
+“El aporte más grande del cientifico de datos es el impacto. Tu trabajo es que los datos impacten de manera positiva a tu organización”
+Los datos deben contar una historia y que ayude a tomar decisiones.
+Las habilidades de un cientifico de datos siempre van a ser necesarias en el ambito laboral.

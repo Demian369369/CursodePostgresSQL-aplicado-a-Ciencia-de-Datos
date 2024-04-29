@@ -1,0 +1,19 @@
+24. Window functions
+Ranking
+Las Window Functions (funciones de ventana) son una característica avanzada en SQL que permite realizar cálculos y operaciones en un conjunto de filas relacionadas dentro de una consulta, sin afectar el resultado general de la consulta.
+
+Las Window Functions proporcionan un mecanismo para realizar operaciones de agregación, cálculos de rangos y clasificaciones en un conjunto de filas definido por una ventana (window) en lugar de en todo el conjunto de resultados de la consulta.
+
+Algunos ejemplos de Window Functions son:
+
+Funciones de agregación: Puedes calcular sumas, promedios, valores máximos o mínimos, entre otros, en un conjunto de filas definido por una ventana. Por ejemplo, puedes calcular la suma acumulativa de ventas por mes para cada producto en una tabla.
+Funciones de clasificación y ranking: Puedes asignar clasificaciones o rankings a las filas basadas en un criterio específico dentro de una ventana. Por ejemplo, puedes determinar el ranking de los mejores vendedores por región en función de sus ventas.
+Funciones de desplazamiento: Puedes acceder a los valores de filas anteriores o siguientes dentro de una ventana. Por ejemplo, puedes calcular la diferencia entre el valor actual y el valor anterior en una serie temporal.
+Las Window Functions se utilizan en combinación con la cláusula OVER, que define la ventana sobre la cual se aplicarán las operaciones. La cláusula OVER especifica la partición de filas y el ordenamiento dentro de la ventana.
+
+Las Window Functions son especialmente útiles cuando se requiere realizar cálculos complejos en un conjunto de filas relacionadas sin la necesidad de realizar subconsultas o joins adicionales. Proporcionan una forma más eficiente y elegante de realizar este tipo de operaciones en SQL.
+
+Es importante destacar que las Window Functions no están disponibles en todos los sistemas de bases de datos, por lo que su disponibilidad puede depender del motor de base de datos que estés utilizando.
+
+
+...........................................................

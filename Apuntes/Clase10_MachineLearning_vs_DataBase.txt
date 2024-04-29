@@ -1,0 +1,43 @@
+ML es un conjunto de ciencias, estrategias, disciplinas y algoritmos que nos van ayudar a tomar la capacidad de computo de las maquinas para resolver problemas de clasificación, de forma que se haga de forma automática, otro punto es realizar predicciones con base a patrones para generar tendencias acorde al comportamiento historico para predecir el futuro
+
+Data Science Conoce a la organización y empresa a detalle para poder hacer algo al respecto. Toma todas las variables de la organización y herramientas disponibles para causar el mejor impacto
+
+ML Es una herramienta más que complementa al Data Science y a la organización
+......................................................
+Machine Learning - Es un conjunto de ciencias, estrategias, disciplinas y algoritmo que nos permite tomar la capacidad de computo de una computadora para resolver diversos problemas con algoritmos. Los mayores rubros de aplicación del ML son:
+Clasificación - Se encarga de encontrar diferentes segmentos dentro de los datos. Suele estar asociado a técnicas de aprendizaje no supervisado. Un ejemplo útil sería clasificar a los clientes de un banco.
+Predicción - Toma datos históricos para poder generar tendencias de algún tipo y así comprender comportamientos futuros.
+Data Science - Se enfoca principalmente en conocer a una organización o una empresa con alto nivel de detalle, de tal forma que tomar acciones basándose en las necesidades de estas. un DS posee muchas herramientas tales como la estadística, matemáticas, programación y también un conocimiento básico de Machine Learning para poder resolver los diferentes problemas que se presenten. Es importante que también posea un conocimiento profundo del negocio.
+......................................................
+Data science vs. Machine Learning
+Machine Learning
+
+Utilizar varios algoritmos para resolver problemas.
+Clasificación. Encontrar ciertos grupos de población.
+Predicción. Utilizar datos históricos para predecir una tendencia.
+Data Science
+
+Conocer una organización de manera muy granular.
+ML es una herramienta fundamental dentro del DS.
+PostgreSQL es otra buena herramienta para el proceso de DS.
+......................................................
+Data Science:
+Definición:
+
+La ciencia de datos es un campo amplio que abarca la recopilación, limpieza, análisis y visualización de datos para obtener información valiosa.
+Objetivo:
+
+Se centra en comprender y resolver problemas complejos mediante el análisis de datos. Incluye la exploración de datos, estadísticas, visualización y narrativa de datos.
+Herramientas y técnicas:
+
+Utiliza una variedad de herramientas que van desde lenguajes de programación como Python y R hasta herramientas de visualización como Tableau.
+Machine Learning:
+Definición:
+
+El aprendizaje automático (Machine Learning) es una rama de la inteligencia artificial que se centra en el desarrollo de algoritmos y modelos que permiten a las computadoras aprender patrones a partir de datos y realizar tareas específicas sin ser programadas explícitamente.
+Objetivo:
+
+Se enfoca en construir modelos predictivos y clasificatorios basados en datos históricos. Los algoritmos de aprendizaje automático pueden realizar tareas como reconocimiento de patrones, clasificación, regresión y clustering.
+Herramientas y técnicas:
+
+Involucra algoritmos específicos de aprendizaje automático como regresión lineal, máquinas de soporte vectorial (SVM), redes neuronales, entre otros.

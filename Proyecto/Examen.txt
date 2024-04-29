@@ -1,0 +1,102 @@
+1. ¿Qué tipo de bases de datos se implementaron primero? 
+
+Basadas en texto. 
+
+2. ¿Cuál de las siguientes es una ventaja de las RDB? 
+
+Son multipropósito. 
+
+3. En la implementación, ¿a qué equivalen las relaciones? 
+
+Registros. REPASAR CLASE 
+
+4. ¿Cuál de las siguientes es una de las sentencias principales de SQL estándar? 
+
+GROUP BY 
+
+5. ¿De qué se encarga la ciencia de datos? 
+
+Todas las anteriores. 
+
+6. ¿Cuál es la principal función de la aplicación de la cienca de datos?
+
+Tomar decisiones basadas en datos. 
+
+7. ¿Cuál de los siguientes no se considera típicamente parte de un equipo de datos? 
+
+Mapeador de datos. 
+
+8. ¿Un equipo orientado a datos debe estar compuesto de varios Científicos de Datos? 
+
+Falso 
+
+9. ¿PostgreSQL tiene un lenguaje que es superset del estándar SQL? 
+
+Verdadero 
+
+10. El lenguaje PLPSQL ayuda a la ciencia de datos porque ayuda a transformar los datos a un formato presentable. 
+
+Verdadero 
+
+11. PostgreSQL utiliza solamente SQL y PLPGSQL. 
+
+Falso 
+
+12. ¿Cuál es una ventaja de usar Python como lenguaje de datos?
+
+Ayuda con estructuras de datos no tabulares. 
+
+13. ¿Cuál es la principal dificultad de lidiar con datos no primitivos? 
+
+Son difíciles de indexar/buscar. 
+
+14. ¿Cómo se representa una relación muchos a muchos en una base de datos? 
+
+Una tabla transitiva. 
+
+15. La agregación de datos nos ayuda a: 
+
+Obtener resultados sumarizados. 
+
+16. La presentación de los datos no se debe tomar en cuenta hasta el momento de la ejecución: 
+
+Falso 
+
+17. ¿Por qué es dificil trabajar con objetos para una RDB? 
+
+El objeto se guarda y se busca como un string complejo. 
+
+18. ¿La sentencia WITH es parte del estándard SQL? 
+
+Falso 
+
+19. Las Window Functions nos permiten: 
+
+Hacer calculos del dataset relacionado con un registro individual. 
+
+20. Las particiones nos permiten: 
+
+Acelerar búsquedas por rango. 
+
+21. Solamente utilizamos SQL Estándard para obtener todos los datos del Top 10. 
+
+Falso 
+
+22. Para actualizar los precios es necesario usar: 
+
+Trigger y Stored Procedure. 
+
+23. ¿Cuál Window Function nos ayuda a tener el lugar del row actual en el dataset sin repetir valores? 
+
+dense_rank 
+
+24. ¿Cuál de los siguientes es un dato geográfico válido por si mismo? País. 
+
+25. ¿Cuál es la principal ventaja de los datos en el tiempo? 
+
+Se pueden encontrar tendencias con facilidad. 
+
+26. Es un ejemplo de programa de visualización de datos: 
+
+Tableau
+

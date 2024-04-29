@@ -1,0 +1,275 @@
+Tomando el control con las funciones de PostgreSQL: Cerrando la brecha con la funcionalidad de los ORM
+Revelando la disparidad: comprendiendo la brecha entre el controlador directo y la funcionalidad ORM
+Cuando se trata de elegir las tecnologías para desarrollar un backend y manipular datos en una base de datos como PostgreSQL, los desarrolladores a menudo se enfrentan a la elección entre usar el controlador oficial o una capa de abstracción como un ORM, en este caso, Prisma. Ambos enfoques tienen sus ventajas y desventajas, pero se ha argumentado que los ORM son superiores debido a una miríada de características diseñadas para las operaciones comunes CRUD que se realizan típicamente en una API REST. En este artículo, exploraremos cómo las funciones en PostgreSQL nos permiten cerrar la brecha entre usar el controlador oficial directamente y las funcionalidades proporcionadas por un ORM como Prisma. Nos enfocaremos específicamente en las operaciones de inserción de datos, examinando cómo las funciones pueden proporcionar resultados similares a los obtenidos al usar un ORM, incluida la capacidad de devolver objetos creados y mucho más.
+
+
+import 'dotenv/config';
+import { Client } from 'pg';
+
+const pg = new Client({
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  host: process.env.DB_HOST,
+  port: parseInt(process.env.DB_PORT, 10),
+  database: process.env.DB_NAME,
+});
+
+pg.connect().then(() => {
+  console.log('db connected');
+  pg.query(
+    `INSERT INTO reservations (_date, hora, res_number, res_name, room, meal_plan, pax_number, cost, observations)
+      VALUES
+        ('2023-07-27', '21:00', 001, 'Jhon Doe', 'P01', 'SC', 2, 50.00, 'Sin observaciones')`,
+  ).then((result) => {
+    console.log(result);
+    pg.end().then(() => {
+      console.log('disconnected from db');
+    });
+  });
+});
+
+/*
+db connected
+Result {
+  command: 'INSERT',
+  rowCount: 1,
+  oid: 0,
+  rows: [],
+  fields: [],
+  ... más metadatos
+}
+disconnected from db
+*/
+En este ejemplo ejecutado en Node.js, se puede ver que no hay mucha información útil sobre el resultado de esa operación y demasiados metadatos.
+
+Ahora, comparemos eso con una inserción realizada en Prisma.
+
+
+prisma.pokemons.create({
+    data:{
+      id: 1100,
+      name: 'new_pokemon'
+    }
+  }).then((result: any) => {
+    console.log(result);
+  })
+
+/*
+{ id: 1100, name: 'new_pokemon' }
+*/
+Con Prisma, podemos deshacernos de los metadatos y extraer el objeto insertado en la base de datos.
+
+Intentemos emular ese tipo de resultado.
+
+Introducción a las funciones en PostgreSQL
+Vayamos directamente a un ejemplo de código simple de una función en Postgres.
+
+
+CREATE FUNCTION sum(num1 numeric, num2 numeric) -- declarar la función y los parámetros
+RETURNS numeric -- tipo de dato devuelto
+AS $$
+BEGIN -- inicio del código
+  RETURN num1 + num2; -- resultado
+END; -- fin del código
+$$ LANGUAGE plpgsql; -- fin de la función
+
+SELECT sum(2, 3); -- devuelve 5
+Podría haber más secciones en una declaración de función, como la captura de excepciones o la declaración de variables. Dejaremos eso para más adelante.
+
+Pero ahora vamos a adentrarnos en otro ejemplo. Un poco más elaborado.
+
+
+CREATE TABLE reservations (
+  id SERIAL PRIMARY KEY,
+  pax INTEGER,
+  capacity INTEGER,
+  do_res DATE, -- fecha de la reserva
+  to_res TIME -- hora de la reserva
+);
+
+-- llenando la base de datos con datos incorrectos que generarán excepciones en nuestra función
+INSERT INTO reservations (pax, capacity, do_res, to_res) VALUES 
+(0, 0, '2022-01-01', '10:00:00');
+
+/* Úsalo para jugar con la función si es necesario
+-- llenando la base de datos con datos correctos
+INSERT INTO reservations (pax, capacity, do_res, to_res) VALUES 
+(2, 4, '2022-01-01', '10:00:00'),
+(3, 6, '2022-01-02', '11:00:00'),
+(4, 8, '2022-01-03', '12:00:00'),
+(5, 10, '2022-01-04', '13:00:00'),
+(6, 12, '2022-01-05', '14:00:00'),
+(7, 14, '2022-01-06', '15:00:00'),
+(8, 16, '2022-01-07', '16:00:00'),
+(9, 18, '2022-01-08', '17:00:00'),
+(10, 20, '2022-01-09', '18:00:00');
+*/
+Intentemos crear una función que pueda calcular el porcentaje de ocupación.
+
+
+SELECT SUM(pax)*100 / SUM(capacity) AS ocupation FROM reservations;
+Esta es una consulta normal, pero ahora generemos la función.
+
+Sé que podríamos usar NULLIF para evitar excepciones, pero pronto quiero lanzar esta excepción.
+
+
+CREATE OR REPLACE FUNCTION porcentaje_ocupacion(fecha_i DATE, fecha_f DATE)
+RETURNS FLOAT AS $$
+DECLARE -- declarando variables
+  total_pax INTEGER;
+  total_capacity INTEGER;
+  porcentaje FLOAT;
+BEGIN
+  SELECT SUM(pax), SUM(capacity) INTO total_pax, total_capacity FROM reservations WHERE do_res BETWEEN fecha_i AND fecha_f;
+  porcentaje := total_pax * 100.0 / total_capacity;
+  RETURN porcentaje;
+END;
+$$ LANGUAGE plpgsql;
+Ahora hemos creado una función más compleja, pero aún no es suficiente.
+
+Es muy común y una buena práctica dejar que los servidores manejen cualquier tipo de errores. Si ocurre un error dentro de la base de datos, se escalará hasta el servidor lanzando una excepción. Si llenas el servidor solo con los datos incorrectos restantes y tratas de ejecutar la función, esto es lo que obtendrás.
+
+
+SELECT porcentaje_ocupacion('2022-01-01', '2022-12-31');
+-- ERROR:  división por cero
+-- CONTEXT:  función PL/pgSQL porcentaje_ocupation(date,date) línea 8 en la asignación
+No sugiero que deberíamos crear una forma diferente de manejar estas excepciones, pero podríamos hacerlo si queremos. En la próxima parte manejaremos excepciones.
+
+##Mejorando las capacidades de la función con respuestas personalizadas y gestión de excepciones
+
+Y ahora es el momento de presentarte algunas otras características que podemos utilizar en PostgreSQL, como un bloque try/catch dentro de PostgreSQL y algunos datos del sistema que podemos obtener dentro de las funciones.
+
+
+CREATE OR REPLACE FUNCTION porcentage_ocupation2(fecha_i DATE, fecha_f DATE)
+RETURNS JSON AS $$ -- devolver un JSON es una excelente opción para retornar resultados personalizados
+DECLARE
+  total_pax INTEGER;
+  total_capacity INTEGER;
+  porcentage FLOAT;
+  stack text; -- obtendremos la pila de errores aquí
+  result JSON; -- construiremos el resultado aquí
+BEGIN -- comienza la función
+  BEGIN -- este segundo BEGIN funciona como el try en un bloque try/catch
+    SELECT SUM(pax), SUM(capacity) INTO total_pax, total_capacity FROM reservations WHERE do_res BETWEEN fecha_i AND fecha_f;
+    porcentage := total_pax * 100.0 / total_capacity;
+    result := json_build_object('isError', FALSE, 'result', porcentage);
+  EXCEPTION -- y aquí está el catch en el bloque try/catch
+    WHEN OTHERS THEN
+      GET STACKED DIAGNOSTICS stack = PG_EXCEPTION_CONTEXT; -- cómo obtener la pila de errores en PostgreSQL
+      result := json_build_object('isError', TRUE, 'message', SQLERRM, 'errorCode', SQLSTATE, 'stack', stack); -- SQLERRM, SQLSTATE son variables del sistema proporcionadas por PostgreSQL
+  END; -- fin del bloque try/catch
+  RETURN result; -- devolver la respuesta
+END;
+$$ LANGUAGE plpgsql;
+Y con esta segunda función creada, veamos el resultado cuando terminamos dividiendo por 0.
+
+
+SELECT porcentage_ocupation2('2022-01-01','2022-12-31');
+/*                                                                      
+porcentage_ocupation2                                                
+----------------------
+ {"isError" : true, "message" : "division by zero", "errorCode" : "22012", "stack" : "PL/pgSQL function porcentage_ocupation2(date,date) line 11 at assignment"}
+*/
+Como dije antes, no defenderé si esta es una buena práctica o no, simplemente diré que podríamos manejar las excepciones que ocurren dentro de la ejecución del código. Será decisión del gerente de proyecto o de los desarrolladores senior si esto es útil o no.
+
+Pasemos al controlador en Node.js, porque hemos alcanzado los requisitos previos para lograr nuestro objetivo.
+
+
+pg.connect().then(() => {
+  console.log('db connected');
+  pg.query(`SELECT porcentage_ocupation2('2022-01-01','2022-12-31' as result)`).then(
+    (result) => {
+      console.log(result.rows[0].result); // buscando el resultado directamente en el punto donde debería estar
+      pg.end().then(() => {
+        console.log('disconnected from db');
+      });
+    },
+  );
+});
+/*
+db connected
+{
+  isError: true,
+  message: 'division by zero',
+  errorCode: '22012',
+  stack: 'PL/pgSQL function porcentage_ocupation2(date,date) line 11 at assignment'
+}
+disconnected from db
+*/
+Estamos aprovechando el hecho de que al devolver un JSON desde la función de PostgreSQL, se devolverá 1 y solo 1 fila. Es por eso que siempre podemos buscar el resultado en ese lugar del objeto. Esta es exactamente la característica que queríamos construir. Ahora avancemos para implementarla en las operaciones de CRUD, ya que es más significativo que hacerlo en una consulta SELECT.
+
+Convirtiendo conceptos en código: Escribiendo la lógica de un INSERT en funciones de PostgreSQL
+Estamos a punto de terminar, así que no perdamos más tiempo.
+
+
+CREATE OR REPLACE FUNCTION create_reservation(
+  _pax INTEGER,
+  _capacity INTEGER,
+  _do_res DATE,
+  _to_res TIME
+) RETURNS JSON AS $$
+DECLARE
+  inserted_reservation reservations; -- aquí recuperaremos el objeto insertado
+  response JSON;
+  stack_info TEXT;
+BEGIN
+  BEGIN
+    IF _do_res < CURRENT_DATE THEN
+      response := json_build_object(
+        'isError', FALSE, -- podría considerarse un error (un error de solicitud incorrecta)
+        'message', 'Solicitud incorrecta: No se insertó ningún registro - No puedes crear una reserva en el pasado',
+        'rowsAffected', 0,
+        'result', NULL
+      );
+    ELSE
+      BEGIN
+        INSERT INTO reservations (
+          pax,
+          capacity,
+          do_res,
+          to_res
+        ) VALUES (
+          _pax,
+          _capacity,
+          _do_res,
+          _to_res
+        )
+        RETURNING * INTO inserted_reservation; -- recuperar el objeto insertado
+
+        IF inserted_reservation IS NULL THEN
+          response := json_build_object(
+            'isError', TRUE, 'message', 'No se insertó ningún registro',
+            'rowsAffected', 0
+            );
+        ELSE
+          response := json_build_object(
+            'isError', FALSE, 'result', inserted_reservation, 'rowsAffected', 1
+            );
+        END IF;
+      EXCEPTION
+        WHEN OTHERS THEN
+          GET STACKED DIAGNOSTICS stack_info = PG_EXCEPTION_CONTEXT;
+          response := json_build_object(
+            'isError', TRUE, 'message', SQLERRM, 'errorCode', SQLSTATE,
+            'stack', stack_info
+            );
+      END;
+    END IF;
+
+    RETURN response;
+  END;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT create_reservation(
+  2, 4, '2023-07-27', '19:00'
+) AS result;
+Ten en cuenta que la función está agregando una "restricción" a create_reservation, no permitiendo crear una reserva antes de la fecha actual (CURRENT_DATE). Este es un control adicional que podemos agregar utilizando funciones.
+
+Con esto, hemos llegado al final de esta publicación.
+
+En conclusión, al aprovechar el poder de las funciones en PostgreSQL, hemos reducido la brecha entre el ORM y la programación directa de la base de datos. A través de nuestra exploración, hemos obtenido una comprensión más profunda de cómo aprovechar las funciones de manera efectiva, lo que nos permite personalizar las respuestas, manejar excepciones y agregar más control en nuestra base de datos.
+
+Si bien trabajar directamente con la base de datos puede requerir un esfuerzo adicional, ofrece un control incomparable sobre el proceso de manipulación de datos. Las funciones permiten a los desarrolladores tener un control detallado y aprovechar todo el potencial de PostgreSQL.
+
+El momento en que las funciones de PostgreSQL realmente superan a los ORMs es cuando el servidor se enfrenta al desafío de ejecutar consultas complejas o proporcionar inteligencia empresarial. Es en estos escenarios donde se hace evidente el verdadero poder de la programación de funciones en PostgreSQL. Las funciones ofrecen un nivel de flexibilidad y control que va más allá de las capacidades de los ORMs, permitiendo a los desarrolladores crear consultas intrincadas y optimizadas adaptadas a requisitos comerciales específicos.

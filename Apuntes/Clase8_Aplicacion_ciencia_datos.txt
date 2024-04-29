@@ -1,0 +1,28 @@
+En una organización la parte a la que más va a ayudar la ciencia de datos es a la toma de decisiones.
+
+Data Driven. Consiste en tomar decisiones basadas en los datos. Es labor del DS brindar estos datos y sus representaciones.
+Información significativa. Entender de que manera podemos aprovechar los datos para decir que cosa y cómo la vamos a presentar
+Representación de los datos. Es importante presentar de forma visual los datos dependiendo del problema y el publico al que va dirigida esta presentación.
+Neutralidad de datos. Hay ocasiones en la que los datos escogidos generan situaciones fuertes de discriminación a la hora de usarlos en modelos de AI, esto es conocido como Machine Bias.
+Storytelling con datos. Es importante ser capaz de comunicar resultados para poder generar un impacto dentro de la organización.
+..........................................
+Aplicación de la ciencia de datos
+Donde más pueden ayudar los datos es en la toma de decisiones.
+Data-driven. Decisiones basadas en datos.
+Proveer la información correcta, tomar las distintas fuentes de datos para que cuenten la historia que tienen que contar para que la persona indicada tome las decisiones.
+Tener en cuenta el formato adecuado para el público adecuado.
+Vigilar la neutralidad de datos.
+Contar una historia adecuada.
+..........................................
+La ciencia de datos continúa expandiéndose en nuevos campos a medida que se generan más datos y se desarrollan tecnologías avanzadas. La capacidad de extraer información significativa de los datos ha transformado numerosas industrias y se espera que siga siendo una herramienta esencial para la toma de decisiones informada en el futuro.
+
+..........................................
+En base a esta clase, hay un aporte de un alumno de Platzi (Angel Francisco Flores Ayala) que comentó sobre la Neutralidad de Datos que esto se llama Machine Bias
+
+Tiene toda la razón y dejo una parte de lo que busqué, pues no entendí muy bien a qué se refiere el hecho de datos discriminatorios. Dejo una parte de un artículo que leí y luego la URL
+
+¿Sabías que en 2016 se descubrió que algunos de los algoritmos de LinkedIn tenían un sesgo de género que, por ejemplo, recomendaba empleos mejor remunerados a hombres en vez de a mujeres? Esta casuística se veía reforzada por el hecho de que, en la sociedad actual, los puestos de elevada remuneración están predominantemente ocupados por hombres. De igual manera, cuando buscabas a un usuario femenino en esa red, era habitual que el motor de búsqueda te sugiriera un nombre masculino similar. Un año antes, en 2015, un desarrollador de software advirtió que el servicio de reconocimiento facial de Google había etiquetado las fotos de él con un amigo de color como “gorilas”. Google entonó el mea culpa y declaró que estaba “trabajando en soluciones a largo plazo“. Más de dos años después, uno de esos arreglos corresponde a borrar los términos relativos a gorilas y algunos otros primates del léxico del servicio; una torpe solución a todas luces, lo cual ilustra las dificultades a las que se enfrentan las compañías de tecnología cuando buscan ofrecer servicios de calidad fundamentados en aprendizaje automático.
+
+¿Qué es Machine Bias?
+
+

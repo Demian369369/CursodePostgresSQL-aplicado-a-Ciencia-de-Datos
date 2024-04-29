@@ -1,0 +1,71 @@
+Básicamente son estructuras de contro en PosgreSQL. En este caso el profesor solo hizo un bucle y retornó un número, pero podría haber ejecutado algo más interesante como una serie de Updates u otra cosa. . A veces, cuando estás programando, te puede pasar que tengas que hacer un bucle en Python, PHP, JS o el lenguajes que estés usando (a partir de ahora diré Python para simplificar) y que dentro del bucle tengas que ejecutar una sentencia SQL. Realizar cálculos en Python y volver a insertar datos. En estos casos, en cada vuelta del loop Python tendrá que llamar internamente al conector que le permite leer la base de datos, luego realizará los cálculos y conectará otra vez para con la DB para insertar el valor final.
+
+Bueno, en estos casos puedes hacer uso de las Common Table Expressions para hacer to loop directamente en PostgreSQL, realizar tus calculos y volver a insertar sin tener que llamar al conector en cada itineración. Ahorrarás tiempos, recursos, dinero, la aplicación será más rápida y te darán un ascenso... bueno... puede que lo último no pase solo por eso, pero si lo sabes vender impresiones puede que impresiones a algo y te ayude a conseguirlo en el largo plazo.
+
+Para saber más: Leer la documentación oficial
+
+................................
+Interpretación del tutorial
+
+Lo que hace las CTE es crear tablas de consulta virtuales/temporales (sin output de datos) equivalentes a los campos que solicita el Query principal.
+
+Luego, con un SELECT externo al WITH, se hace el llamado para unir los SELECT dentro del WITH y así visualizar la consulta solicitada principalmente. Para el ejemplo, era la solicitud “las películas de genero Horror mas rentadas con un precio de renta mayor a $1 y con mas de 100 minutos de duración”
+
+Donde podemos resumir que se requieren los siguientes datos:
+
+Conteo de rentas total (rentas_acumuladas)
+Agrupación por película
+Filtro 1 por categoría “Horror” (genero)
+Filtro 2 duración mayor a 100 minutos
+Filtro 3 precio de renta mayor a $1
+Entonces, al iniciar con la sentencia WITH se da creación a las tablas temporales; tantas como campos solicite el Query principal y que se puedan consolidar en una consulta con JOIN simples.
+
+
+**--DECLARACIÓN DE LA CTE CON *WITH*--**
+WITH 
+**--PRIMERA TABLA TEMPORAL--**
+peliculas_rentadas AS (
+	SELECT pelicula_id, COUNT(fecha_renta) AS rentas_acumuladas
+	FROM inventarios
+	JOIN  rentas
+		ON inventarios.inventario_id = rentas.inventario_id
+	GROUP BY inventarios.pelicula_id
+	ORDER BY rentas_acumuladas DESC
+),
+Esta primera expresión, responde al apartado ‘conteo de rentas total’ o ‘rentas_acumuladas’ y por consiguiente a la respectiva ‘agrupación por película’. Luego continúa la segunda tabla temporal, igualmente dentro de la sentencia WITH.
+
+
+**--SEGUNDA TABLA TEMPORAL--**
+peliculas_categoria_horror AS (
+	SELECT pelicula_id, nombre
+	FROM peliculas_categorias
+	JOIN categorias 
+		ON peliculas_categorias.categoria_id = categorias.categoria_id
+	WHERE 
+		categorias.nombre = 'Horror'
+)
+La segunda expresión del WITH llamada ‘peliculas_categoria_horror’ responde al filtro 1, el cual solo desea ver las películas de la categoría/genero ‘Horror’. Seguido a esto se cierra la sentencia WITH para este CTE con paréntesis y se inicia la consulta externa.
+
+
+**--CONSULTA EXTERNA PARA VISUALIZAR RESULTADOS--**
+SELECT 
+	peliculas.titulo,
+	peliculas_categoria_horror.nombre AS genero,
+	peliculas_rentadas.rentas_acumuladas AS rentas_acumuladas,
+	precio_renta * (peliculas_rentadas.rentas_acumuladas) AS monto_rentas_acumulado 
+	
+FROM peliculas
+	JOIN peliculas_categoria_horror
+		ON peliculas.pelicula_id = peliculas_categoria_horror.pelicula_id
+	JOIN peliculas_rentadas
+		ON peliculas.pelicula_id = peliculas_rentadas.pelicula_id
+En esta parte del Query, simplemente se hace un SELECT que llama los campos generados en las tablas temporales. Además, se hacen JOIN para relacionarlos y traer también los nombres de las películas en vez de solamente el ID de cada una de ellas.
+
+
+**--FILTROS 2 Y 3 DE LA CONSULTA EXTERNA--**
+WHERE 
+	peliculas.duracion > 100 and peliculas.precio_renta < 1;
+Finalmente se aplican los filtros 2 y 3 que al ser dependientes de la tabla ‘películas’, la cual se relacionó en la consulta externa anterior, se escriben solamente al final de esta.
+
+..........................
+es la suma recursiva de los números 1 hasta el 100, otra forma de verlo sencillo, es sumando el numero mayor con el menor sucesivamente algo como: 100+1=101, 99+2=101, 98+3=101, y así sucesivamente y te vas a dar cuenta que con esas sumas se repite 101 50 veces, por lo tanto quedaría 101x50=5050... y como sabemos que se multiplica por 50?, simplemente viendo que el 100 es numero par, y si lo dividimos entre 2, da 50, eso quiere decir que se van hacer 50 pares de sumas de 101, que es lo que hicimos arriba (100+1)(100/2)=5050

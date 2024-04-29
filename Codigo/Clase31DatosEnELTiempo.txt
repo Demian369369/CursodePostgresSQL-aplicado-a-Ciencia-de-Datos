@@ -1,0 +1,21 @@
+SELECT date_part('year', rentas.fecha_renta) AS anio,
+		date_part('month', rentas.fecha_renta) AS mes,
+		peliculas.titulo,
+		COUNT(*) AS numero_rentas
+FROM 	rentas;
+	INNER JOIN inventarios ON rentas.inventario_id = inventario_id
+	INNER JOIN peliculas ON peliculas.pelicula_id = inventario_pelicula_id
+GROUP BY anio, mes, peliculas.pelicula_id;
+...................................................................
+SELECT date_part('year', rentas.fecha_renta) AS anio,
+		date_part('month', rentas.fecha_renta) AS mes,
+		COUNT(*) AS numero_rentas
+FROM 	rentas
+GROUP BY anio, mes;
+...................................................................
+SELECT date_part('year', rentas.fecha_renta) AS anio,
+		date_part('month', rentas.fecha_renta) AS mes,
+		COUNT(*) AS numero_rentas
+FROM 	rentas
+GROUP BY anio, mes
+ORDER BY anio, mes;

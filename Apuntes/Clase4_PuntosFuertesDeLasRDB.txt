@@ -1,0 +1,33 @@
+Un caso genérico para el uso de una base de datos relacional podría ser cualquier sistema que pueda ser bien definido en sus entidades, estas a su vez en sus atributos y relaciones, es decir, hay una estructura concreta de los datos. Un ejemplo seria la base de datos para una biblioteca, puesto puedo definir una estructura para los datos a través de entidades, atributos y relaciones. 🚀 Por otro lado para una base de datos no relacional seria algo curioso, se me ocurre un caso de investigación en la que muchas variables puedan ser medidas por un robot que seria enviado a cumplir esta tarea, pero no se sabe si estas variables existirán en el medio estudiado, podría ser como un viaje a marte o algún otro planeta, incluso a los fondos mas oscuros del mar. Se usaría una base de datos no relacional ya que no habrá una estructura definida de los datos que serán emitidos por el robot enviado. Podría ser una base de datos basada en documentos, como Firebase o MongoDB. 🤓
+
+Puntos fuertes de las RDB
+Multipropósito - Te permite almacenar, extraer, estados de anidación y nos permite jugar con las bases de datos
+Ampliamente utilizadas - Sin importar en el campo que entres en el campo de datos, se van a econtrar con bases de datos relacionales
+Información consistente - La idea en una base de datos relacional que si se tiene data en la base sea datos unicos y relacionarla con otra información.
+Flexible - Se puede ocupar solo para almacenar datos, extraerlos o jugar con datos
+Retrocompatible - Los motores de base de datos avanzan constantemente en sus motores pero siempre arreglando los problemas de sus estandares
+Completamente programable - Permite usar lenguajes procedurales que pueden ayudar a extraer datos o guardarlos e incluso hacer cosas más complejos dentro de la misma base de datos
+......................................................................
+Soy biólogo, usaria una BDR para documentar la biodiversidad de mamíferos en diferentes reservas naturales en el estado. Por un lado los mamiferos tienen diferentes niveles de agrupación taxonimica por lo que haria tablas por Ordenes (p.ej. Roedores, Murcielagos, Carnivoros, Lagomofos) y por otro lado las reservas pueden estar bajo diferentes niveles de manejo como los son a nivel federal, estatal, municipal o privadas, ademas estas reservas pueden englobar diferentes tipos de vegetación. Con esta base de datos podría calcular indices de biodiversidad por reserva, por tipo de vegetación. Saber la cantidad de area protegida en la que se distribuye cierta especie o cierto tipo de vegetación, etc.
+
+Para una base de datos no relacial piendo en una aplicación como Naturalista en la que las personas suben fotografias de animales o plantas para que colaboradores las identifiquen. Las entradas contiene una fotografia, datos geograficos, una breve descripción de lo que se observa y lo mas importante la identificación de la especie. En este caso no es necesario una base de datos relacionales.
+........................................................................
+Para una base de datos relacional, se podría utilizar de ejemplo el registro de ventas, donde tenemos un identificador de transacción, las características del producto o servicio comprado y a la vez datos de fechas de creación/termino, a si como las propias del cliente.
+
+Para el ejemplo de una no relacional se me ocurre las situaciones de análisis para las ventas donde se mezcle información extra. por ejemplo la incidencia del stock disponible en caso de la venta en linea, u otras características que no sean propias de la venta en si. Factores que en conjunto permitan generar la venta
+........................................................................
+en CRM y ERP, utilizando diferentes front-end, desde web, formularios, power apps e importando datos mediante programación, tienen sus limite como tu dices, cuando son datos de miles usuarios al mismo tiempo, por eso hace muchos años existía (todavía existe) cobol y sus bases de datos se basan en texto y esto lo hace muy rápido, hay sistemas bancarios basados en esto y es complejo remplazarlos por el nivel de velocidad, que no da una DB relacional, yo uso las soluciones de Microsoft y Google de NO SQL que son muy eficientes cuando se trata de cientos y millones de datos,
+.................................
+4. Puntos fuertes de las bases de datos relacionales
+Multipropósito
+Ampliamente utilizadas
+Información consistente
+Flexible
+Retrocompatible
+Completamente programable
+Implementar una base de datos relacional en el entorno del transporte colectivo de pasajeros puede ayudar a organizar y gestionar eficientemente la información relacionada con los pasajeros, rutas, horarios, vehículos, conductores, tarifas, entre otros datos relevantes.
+
+Un caso de uso en el que una base de datos relacional podría no ser la mejor opción es cuando se trata de manejar datos no estructurados o semi estructurados, como texto libre, documentos complejos, datos multimedia o datos en formato JSON o XML. En estos casos, una base de datos relacional puede tener dificultades para almacenar y consultar eficientemente este tipo de datos.
+
+MongoDB es un ejemplo popular de base de datos orientada a documentos. Proporciona una estructura de datos flexible que se adapta bien a datos no estructurados o semi estructurados. Permite almacenar y consultar documentos enriquecidos, realizar búsquedas complejas y escalar horizontalmente para manejar grandes volúmenes de datos.
+
